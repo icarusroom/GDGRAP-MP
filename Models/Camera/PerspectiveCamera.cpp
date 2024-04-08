@@ -113,11 +113,19 @@ void PerspectiveCamera::FOV(bool is1stPerson, bool is3rdPerson, glm::vec3 player
     if (is1stPerson) {
         setCameraPosition(glm::vec3(playerposition.x, playerposition.y, playerposition.z - 10.0f));
         this->setZfar(200.f);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_CONSTANT_COLOR, GL_SRC_COLOR);
+        glBlendEquation(GL_FUNC_SUBTRACT);
+        glBlendColor(153.f / 254.f, 255.f / 254.f, 153.f / 254.f, 1.00);
 	}
 	
     if (is3rdPerson) {
         setCameraPosition(glm::vec3(playerposition.x, playerposition.y, playerposition.z + 25.0f));
 		this->setZfar(50.f);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glBlendEquation(GL_FUNC_ADD);
+        
     }
 }
 
